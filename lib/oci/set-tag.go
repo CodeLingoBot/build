@@ -14,7 +14,7 @@
 
 package oci
 
-// SetWorkingDir sets the tag for this OCI image to the given name
+// SetTag sets the tag for this OCI image to the given name
 func (i *Image) SetTag(tag string) error {
 	i.refName = tag
 	return i.save()

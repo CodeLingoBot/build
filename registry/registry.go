@@ -53,7 +53,7 @@ type Registry struct {
 	Debug                bool
 }
 
-// Read the ACI contents stream given the key. Use ResolveKey to
+// ReadStream reads the ACI contents stream given the key. Use ResolveKey to
 // convert an image ID to the relative provider's key.
 func (r Registry) ReadStream(key string) (io.ReadCloser, error) {
 	return os.Open(path.Join(r.DepStoreTarPath, key))
@@ -95,12 +95,12 @@ func (r Registry) HashToKey(h hash.Hash) string {
 	return fmt.Sprintf("%s%x", hashPrefix, s)
 }
 
-// Returns the manifest for the ACI with the given key
+// GetImageManifest returns the manifest for the ACI with the given key
 func (r Registry) GetImageManifest(key string) (*schema.ImageManifest, error) {
 	return util.GetManifest(path.Join(r.DepStoreExpandedPath, key))
 }
 
-// Returns the key for the ACI with the given name and labels
+// GetACI returns the key for the ACI with the given name and labels
 func (r Registry) GetACI(name types.ACIdentifier, labels types.Labels) (string, error) {
 	files, err := ioutil.ReadDir(r.DepStoreExpandedPath)
 	if err != nil {

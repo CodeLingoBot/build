@@ -28,7 +28,7 @@ func (m *Manifest) AddEnv(name, value string) error {
 	return m.save()
 }
 
-// Remove Env will remove an environment variable of name from the current
+// RemoveEnv removes Env will remove an environment variable of name from the current
 // manifest
 func (m *Manifest) RemoveEnv(name string) error {
 	err := removeFromEnv(name, m.manifest)
